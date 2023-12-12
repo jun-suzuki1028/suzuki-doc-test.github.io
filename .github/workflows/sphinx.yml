@@ -14,17 +14,17 @@ jobs:
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
-      - name: Set up Python 3.10
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.9"
       - name: Install Poetry
         run: |
           curl -sSL ${{ env.POETRY_URL }} | \
             python - --version ${{ env.POETRY_VERSION }}
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Sphinx build
-        run: sphinx-apidoc -f -o docs/source/ src/
+        run: poetry run python -c "from sphinx.ext.apidoc import main; main(['-f', '-o', 'docs/source/', 'src/'])"
       - name: Make HTML
         run: sphinx-build docs/source/ docs/build/ -a
       - name: Deploy
