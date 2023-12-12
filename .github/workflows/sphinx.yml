@@ -24,7 +24,7 @@ jobs:
             python - --version ${{ env.POETRY_VERSION }}
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Sphinx build
-        run: poetry run python -c "from sphinx.ext.apidoc import main; main(['-f', '-o', 'docs/source/', 'src/'])"
+        run: poetry run sphinx-apidoc -f -o docs/source/ src/
       - name: Make HTML
         run: sphinx-build docs/source/ docs/build/ -a
       - name: Deploy
