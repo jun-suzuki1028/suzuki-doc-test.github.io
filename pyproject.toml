@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "doc-test"
+version = "0.1.0"
+description = ""
+authors = ["jun-suzuki1028 <calc.9029@gmail.com>"]
+readme = "README.md"
+packages = [{include = "networkx_python"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sphinx = "^7.2.6"
+sphinx-rtd-theme = "^2.0.0"
+myst-parser = "^2.0.0"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
