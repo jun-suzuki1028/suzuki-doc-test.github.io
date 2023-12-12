@@ -1,5 +1,7 @@
 name: Sphinx
-
+env:
+  POETRY_VERSION: 1.3.1
+  POETRY_URL: https://install.python-poetry.org
 on:
   push:
     branches:
@@ -12,8 +14,15 @@ jobs:
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
-      - uses: actions/checkout@v1
-      - run: poetry install
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install Poetry
+        run: |
+          curl -sSL ${{ env.POETRY_URL }} | \
+            python - --version ${{ env.POETRY_VERSION }}
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Sphinx build
         run: sphinx-apidoc -f -o docs/source/ src/
       - name: Make HTML
