@@ -1,0 +1,1 @@
+# suzuki-doc-test.github.io
